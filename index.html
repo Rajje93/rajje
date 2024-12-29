@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React + TS</title>
+    <style>
+      .reactive-element {
+        position: relative !important;
+        overflow: hidden !important;
+      }
+
+      .reactive-element::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.5s;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .reactive-element:hover::before {
+        opacity: 1;
+      }
+
+      /* Default effect */
+      .reactive-element::before {
+        background: radial-gradient(
+          800px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+          rgba(135, 88, 255, 0.15),
+          transparent 40%
+        );
+      }
+
+      /* Premium effect */
+      .reactive-element.effect-premium::before {
+        background: radial-gradient(
+          800px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+          rgba(139, 92, 246, 0.1),
+          transparent 40%
+        );
+      }
+
+      /* Add shine animation */
+      @keyframes shine {
+        from {
+          transform: translateX(-100%) skewX(-15deg);
+        }
+        to {
+          transform: translateX(200%) skewX(-15deg);
+        }
+      }
+
+      .animate-shine {
+        animation: shine 2s infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
